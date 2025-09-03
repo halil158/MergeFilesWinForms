@@ -321,9 +321,7 @@ namespace MergeFilesWinForms
             {
                 System.Diagnostics.Process.Start("explorer.exe", $"/select,\"{sfd.FileName}\"");
             }
-            catch { }
-            MessageBox.Show(this, "Ýþlem tamamlandý!", "Bilgi",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            catch { }            
         }
 
         private static Encoding DetectEncoding(string filePath)
