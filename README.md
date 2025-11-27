@@ -33,7 +33,8 @@ Merge logs, configs, and scripts into a single file.
 
 🖼️ Screenshot
 
-(You can add a screenshot here if you like)
+<img width="986" height="643" alt="image" src="https://github.com/user-attachments/assets/f1bdd8e7-5f2b-4de3-951e-020e5da2898b" />
+
 
 ⚙️ How to Use
 
