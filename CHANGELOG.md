@@ -16,6 +16,10 @@ All notable changes to this project will be documented in this file.
   - Allows including specific files from ignored folders
   - Uses relative path matching (suffix match)
   - Example: `build/zephyr/zephyr.dts`
+- **Automatic AI header**: Merged files now include automatic context header
+  - Lists all included files at the beginning
+  - Shows total file count and generation timestamp
+  - Helps AI tools understand the merged file structure
 - Application icon for window title bar and taskbar
 
 ### Changed

@@ -296,6 +296,24 @@ public partial class MainWindow : Window
             using var fs = new FileStream(dialog.FileName, FileMode.Create, FileAccess.Write, FileShare.Read);
             using var writer = new StreamWriter(fs, new UTF8Encoding(false));
 
+            // Write automatic header for AI context
+            writer.WriteLine("===== MERGED FILE INFO =====");
+            writer.WriteLine();
+            writer.WriteLine("This file contains the merged contents of multiple source files.");
+            writer.WriteLine("Each file's content is separated by a header showing the file name.");
+            writer.WriteLine();
+            writer.WriteLine($"Total files: {_files.Count}");
+            writer.WriteLine($"Generated: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+            writer.WriteLine();
+            writer.WriteLine("Files included:");
+            foreach (var f in _files)
+            {
+                writer.WriteLine($"  - {Path.GetFileName(f)}");
+            }
+            writer.WriteLine();
+            writer.WriteLine("===== FILE CONTENTS =====");
+            writer.WriteLine();
+
             foreach (var file in _files)
             {
                 writer.WriteLine($"===== {Path.GetFileName(file)} =====");

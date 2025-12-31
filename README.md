@@ -16,6 +16,7 @@ MergeFiles is a Windows application that allows you to merge multiple files or e
 - **File extension filter (allow.txt)**: Control which file types are included
 - **Ignore list (ignore.txt)**: Exclude unwanted folders (e.g., `bin`, `obj`, `build`, `node_modules`)
 - **Include override (include.txt)**: Force include specific files from ignored folders
+- **Automatic AI header**: Merged files include automatic header with file list for AI tools
 - **Easy management**: Remove selected items, clear the entire list, and see the total file count
 - **File merging**: Combines the contents of all selected files into a single output file
 - **Encoding detection**: Supports UTF-8, UTF-16, UTF-32 with BOM detection
@@ -54,6 +55,27 @@ Override ignore rules for specific files (relative paths):
 # Include specific files from ignored folders
 build/zephyr/zephyr.dts
 build/zephyr/zephyr.map
+```
+
+## Merged File Format
+
+The merged output file includes an automatic header for AI context:
+```
+===== MERGED FILE INFO =====
+
+This file contains the merged contents of multiple source files.
+Each file's content is separated by a header showing the file name.
+
+Total files: 5
+Generated: 2026-01-01 12:00:00
+
+Files included:
+  - App.xaml.cs
+  - MainWindow.xaml
+  - MainWindow.xaml.cs
+  ...
+
+===== FILE CONTENTS =====
 ```
 
 ## Use Cases
