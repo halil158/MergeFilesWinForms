@@ -276,19 +276,19 @@
                            FontSize="28"
                            FontWeight="Bold"
                            Foreground="{StaticResource TextBrush}"/>
-                <TextBlock Text="Dosyalarınızı sürükleyip bırakın veya klasör ekleyin"
+                <TextBlock Text="Drag and drop files or add a folder"
                            FontSize="14"
                            Foreground="{StaticResource TextMutedBrush}"
                            Margin="0,4,0,0"/>
             </StackPanel>
 
             <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                <Button Content="Klasör Ekle"
+                <Button Content="Add Folder"
                         Style="{StaticResource SecondaryButtonStyle}"
                         Click="BtnAddFolder_Click"
                         Margin="0,0,10,0"/>
                 <Button x:Name="btnMerge"
-                        Content="Birleştir"
+                        Content="Merge"
                         Style="{StaticResource PrimaryButtonStyle}"
                         Click="BtnMerge_Click"/>
             </StackPanel>
@@ -318,12 +318,12 @@
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center"/>
                     </Border>
-                    <TextBlock Text="Dosya veya klasör sürükleyin"
+                    <TextBlock Text="Drag files or folders here"
                                FontSize="18"
                                FontWeight="SemiBold"
                                Foreground="{StaticResource TextBrush}"
                                HorizontalAlignment="Center"/>
-                    <TextBlock Text="veya yukarıdaki 'Klasör Ekle' butonunu kullanın"
+                    <TextBlock Text="or use the 'Add Folder' button above"
                                FontSize="14"
                                Foreground="{StaticResource TextMutedBrush}"
                                HorizontalAlignment="Center"
@@ -338,7 +338,7 @@
                         Margin="2">
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                         <TextBlock Text="📥" FontSize="48" HorizontalAlignment="Center"/>
-                        <TextBlock Text="Dosyaları bırakın"
+                        <TextBlock Text="Drop files here"
                                    FontSize="20"
                                    FontWeight="SemiBold"
                                    Foreground="White"
@@ -377,7 +377,7 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="📄" FontSize="14" VerticalAlignment="Center" Margin="0,0,8,0"/>
                     <TextBlock x:Name="lblCount"
-                               Text="0 dosya"
+                               Text="0 files"
                                Foreground="{StaticResource TextBrush}"
                                FontSize="13"
                                VerticalAlignment="Center"/>
@@ -386,7 +386,7 @@
 
             <!-- Prefix Input -->
             <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                <TextBlock Text="Dosya adı ön eki:"
+                <TextBlock Text="File name prefix:"
                            Foreground="{StaticResource TextMutedBrush}"
                            FontSize="13"
                            VerticalAlignment="Center"
@@ -402,11 +402,11 @@
 
             <!-- Action Buttons -->
             <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="0,0,12,0">
-                <Button Content="Seçileni Kaldır"
+                <Button Content="Remove Selected"
                         Style="{StaticResource SecondaryButtonStyle}"
                         Click="BtnRemoveSelected_Click"
                         Margin="0,0,8,0"/>
-                <Button Content="Temizle"
+                <Button Content="Clear"
                         Style="{StaticResource DangerButtonStyle}"
                         Click="BtnClear_Click"/>
             </StackPanel>
@@ -425,7 +425,7 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Column="0"
-                           Text="Yapılandırma dosyaları:"
+                           Text="Config files:"
                            Foreground="{StaticResource TextMutedBrush}"
                            FontSize="13"
                            VerticalAlignment="Center"
@@ -435,17 +435,17 @@
                     <Button Content="📝 allow.txt"
                             Style="{StaticResource ConfigButtonStyle}"
                             Click="BtnEditAllow_Click"
-                            ToolTip="İzin verilen dosya uzantıları"
+                            ToolTip="Allowed file extensions"
                             Margin="0,0,8,0"/>
                     <Button Content="🚫 ignore.txt"
                             Style="{StaticResource ConfigButtonStyle}"
                             Click="BtnEditIgnore_Click"
-                            ToolTip="Hariç tutulacak klasörler"
+                            ToolTip="Folders to exclude"
                             Margin="0,0,8,0"/>
                     <Button Content="✅ include.txt"
                             Style="{StaticResource ConfigButtonStyle}"
                             Click="BtnEditInclude_Click"
-                            ToolTip="Ignore kurallarını aşan dosyalar"/>
+                            ToolTip="Override ignore rules"/>
                 </StackPanel>
 
                 <TextBlock Grid.Column="2"

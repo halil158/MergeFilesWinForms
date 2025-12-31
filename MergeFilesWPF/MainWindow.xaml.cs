@@ -15,7 +15,7 @@ public partial class MainWindow : Window
     private readonly List<string> _files = new();
     private static readonly char[] _seps = ['\\', '/'];
 
-    // Config dosyaları
+    // Config files
     private readonly string _allowFile;
     private readonly string _ignoreFile;
     private readonly string _includeFile;
@@ -78,8 +78,8 @@ public partial class MainWindow : Window
         {
             File.WriteAllLines(_includeFile, new[]
             {
-                "# Ignore edilen klasörlerdeki spesifik dosyaları dahil etmek için",
-                "# Göreceli yol kullanın (örnek: build/zephyr/zephyr.dts)",
+                "# Include specific files from ignored folders",
+                "# Use relative paths (e.g., build/zephyr/zephyr.dts)",
                 ""
             });
         }
@@ -145,7 +145,7 @@ public partial class MainWindow : Window
     {
         var dialog = new OpenFolderDialog
         {
-            Title = "Klasör Seçin"
+            Title = "Select Folder"
         };
 
         if (dialog.ShowDialog() == true)
@@ -159,7 +159,7 @@ public partial class MainWindow : Window
         var selectedItems = lstFiles.SelectedItems.Cast<string>().ToList();
         if (selectedItems.Count == 0)
         {
-            ShowMessage("Lütfen kaldırılacak dosyaları seçin.", "Uyarı", MessageBoxImage.Warning);
+            ShowMessage("Please select files to remove.", "Warning", MessageBoxImage.Warning);
             return;
         }
 
@@ -176,8 +176,8 @@ public partial class MainWindow : Window
         if (_files.Count == 0) return;
 
         var result = MessageBox.Show(
-            "Tüm dosyaları listeden kaldırmak istediğinize emin misiniz?",
-            "Onay",
+            "Are you sure you want to remove all files from the list?",
+            "Confirm",
             MessageBoxButton.YesNo,
             MessageBoxImage.Question);
 
@@ -232,7 +232,7 @@ public partial class MainWindow : Window
                 }
                 catch (Exception ex)
                 {
-                    ShowMessage($"Klasör okunamadı: {p}\n{ex.Message}", "Hata", MessageBoxImage.Error);
+                    ShowMessage($"Could not read folder: {p}\n{ex.Message}", "Error", MessageBoxImage.Error);
                 }
             }
             else if (File.Exists(p) && IsAllowed(p) && (IsIncluded(p) || !IsIgnored(p)))
@@ -245,7 +245,7 @@ public partial class MainWindow : Window
 
         if (addedCount > 0)
         {
-            // Başarı animasyonu göster
+            // Show success animation
             AnimateSuccess();
         }
     }
@@ -264,14 +264,14 @@ public partial class MainWindow : Window
     {
         if (_files.Count == 0)
         {
-            ShowMessage("Birleştirilecek dosya yok.", "Uyarı", MessageBoxImage.Warning);
+            ShowMessage("No files to merge.", "Warning", MessageBoxImage.Warning);
             return;
         }
 
         var prefix = txtPrefix.Text?.Trim();
         if (string.IsNullOrWhiteSpace(prefix))
         {
-            ShowMessage("Lütfen dosya adı için bir ön ek girin.", "Uyarı", MessageBoxImage.Warning);
+            ShowMessage("Please enter a file name prefix.", "Warning", MessageBoxImage.Warning);
             txtPrefix.Focus();
             return;
         }
@@ -283,8 +283,8 @@ public partial class MainWindow : Window
 
         var dialog = new SaveFileDialog
         {
-            Title = "Birleştirilmiş dosyayı kaydet",
-            Filter = "Metin Dosyası|*.txt|Tümü|*.*",
+            Title = "Save merged file",
+            Filter = "Text File|*.txt|All Files|*.*",
             FileName = fileName,
             OverwritePrompt = true
         };
@@ -309,12 +309,12 @@ public partial class MainWindow : Window
                 writer.WriteLine();
             }
 
-            // Dosyayı explorer'da göster
+            // Show file in explorer
             Process.Start("explorer.exe", $"/select,\"{dialog.FileName}\"");
         }
         catch (Exception ex)
         {
-            ShowMessage($"Kaydetme hatası: {ex.Message}", "Hata", MessageBoxImage.Error);
+            ShowMessage($"Save error: {ex.Message}", "Error", MessageBoxImage.Error);
         }
     }
 
@@ -326,7 +326,7 @@ public partial class MainWindow : Window
         }
         catch (Exception ex)
         {
-            ShowMessage($"Dosya açılamadı: {ex.Message}", "Hata", MessageBoxImage.Error);
+            ShowMessage($"Could not open file: {ex.Message}", "Error", MessageBoxImage.Error);
         }
     }
 
@@ -475,7 +475,7 @@ public partial class MainWindow : Window
         emptyState.Visibility = hasFiles ? Visibility.Collapsed : Visibility.Visible;
         lstFiles.Visibility = hasFiles ? Visibility.Visible : Visibility.Collapsed;
 
-        lblCount.Text = $"{_files.Count} dosya";
+        lblCount.Text = $"{_files.Count} files";
     }
 
     private void AnimateSuccess()

@@ -19,6 +19,9 @@ All notable changes to this project will be documented in this file.
 - Application icon for window title bar and taskbar
 
 ### Changed
+- **Localized to English**: All UI text translated to English for global usage
+  - Buttons, labels, messages, tooltips, and dialogs
+  - Config file comments
 - Updated README with new features and WPF version documentation
 - Reorganized WinForms UI layout to two rows for better button placement
 - Fixed Turkish character encoding issues in WinForms version

@@ -16,10 +16,10 @@ namespace MergeFilesWinForms
         private readonly Label lblCount = new Label();
         private readonly Label lblPrefix = new Label();
         private readonly TextBox txtPrefix = new TextBox();
-        // Durum
+        // State
         private readonly List<string> _files = new List<string>();
 
-        // Config dosyaları
+        // Config files
         private readonly string allowFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "allow.txt");
         private readonly string ignoreFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ignore.txt");
         private readonly string includeFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "include.txt");
@@ -55,8 +55,8 @@ namespace MergeFilesWinForms
             {
                 File.WriteAllLines(includeFile, new[]
                 {
-                    "# Ignore edilen klasörlerdeki spesifik dosyaları dahil etmek için",
-                    "# Göreceli yol kullanın (örnek: build/zephyr/zephyr.dts)",
+                    "# Include specific files from ignored folders",
+                    "# Use relative paths (e.g., build/zephyr/zephyr.dts)",
                     ""
                 });
             }
@@ -64,12 +64,12 @@ namespace MergeFilesWinForms
 
         private void BuildUi()
         {
-            Text = "Merge Files (Drag Drop)";
+            Text = "Merge Files (Drag & Drop)";
             Width = 1000;
             Height = 650;
             StartPosition = FormStartPosition.CenterScreen;
 
-            // Liste
+            // List
             lstFiles.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lstFiles.HorizontalScrollbar = true;
             lstFiles.IntegralHeight = false;
@@ -79,29 +79,29 @@ namespace MergeFilesWinForms
             lstFiles.Height = ClientSize.Height - 190;
             lstFiles.BorderStyle = BorderStyle.FixedSingle;
 
-            // Üst satır butonları (dosya işlemleri)
-            btnAddFolder.Text = "Klasör Ekle";
+            // Top row buttons (file operations)
+            btnAddFolder.Text = "Add Folder";
             btnAddFolder.Width = 100;
             btnAddFolder.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnAddFolder.Left = 10;
             btnAddFolder.Top = ClientSize.Height - 80;
             btnAddFolder.Click += (s, e) => AddFolder();
 
-            btnRemoveSelected.Text = "Seçileni Kaldır";
-            btnRemoveSelected.Width = 110;
+            btnRemoveSelected.Text = "Remove Selected";
+            btnRemoveSelected.Width = 120;
             btnRemoveSelected.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnRemoveSelected.Left = btnAddFolder.Right + 10;
             btnRemoveSelected.Top = btnAddFolder.Top;
             btnRemoveSelected.Click += (s, e) => RemoveSelected();
 
-            btnClear.Text = "Temizle";
+            btnClear.Text = "Clear";
             btnClear.Width = 80;
             btnClear.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnClear.Left = btnRemoveSelected.Right + 10;
             btnClear.Top = btnAddFolder.Top;
             btnClear.Click += (s, e) => { _files.Clear(); RefreshList(); };
 
-            // Sayaç ve prefix (üst satırda)
+            // Counter and prefix (top row)
             lblCount.AutoSize = true;
             lblCount.Left = btnClear.Right + 20;
             lblCount.Top = btnAddFolder.Top + 5;
@@ -109,7 +109,7 @@ namespace MergeFilesWinForms
             UpdateCount();
 
             lblPrefix.AutoSize = true;
-            lblPrefix.Text = "Dosya adı ön eki:";
+            lblPrefix.Text = "File name prefix:";
             lblPrefix.Left = lblCount.Right + 20;
             lblPrefix.Top = btnAddFolder.Top + 5;
             lblPrefix.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
@@ -118,9 +118,9 @@ namespace MergeFilesWinForms
             txtPrefix.Left = lblPrefix.Right + 5;
             txtPrefix.Top = btnAddFolder.Top + 2;
             txtPrefix.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            txtPrefix.Text = "SolionBMS";
+            txtPrefix.Text = "MergedFiles";
 
-            // Alt satır butonları (config dosyaları)
+            // Bottom row buttons (config files)
             btnEditAllow.Text = "Allow.txt";
             btnEditAllow.Width = 100;
             btnEditAllow.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
@@ -142,8 +142,8 @@ namespace MergeFilesWinForms
             btnEditInclude.Top = btnEditAllow.Top;
             btnEditInclude.Click += (s, e) => OpenFile(includeFile);
 
-            // Birleştir butonu (sağ alt)
-            btnMerge.Text = "Birleştir";
+            // Merge button (bottom right)
+            btnMerge.Text = "Merge";
             btnMerge.Width = 150;
             btnMerge.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnMerge.Left = ClientSize.Width - btnMerge.Width - 10;
@@ -239,7 +239,7 @@ namespace MergeFilesWinForms
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(this, $"Klasör okunamadı: {p}\n{ex.Message}", "Hata",
+                        MessageBox.Show(this, $"Could not read folder: {p}\n{ex.Message}", "Error",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
@@ -316,7 +316,7 @@ namespace MergeFilesWinForms
                                          .Trim('/')
                                          .ToLowerInvariant();
 
-                // Yolun sonunda bu kural var mı? (suffix match)
+                // Check if path ends with this rule (suffix match)
                 if (normalizedPath.EndsWith("/" + normalizedRule, StringComparison.OrdinalIgnoreCase))
                     return true;
             }
@@ -404,20 +404,20 @@ namespace MergeFilesWinForms
         }
 
         private void UpdateCount()
-            => lblCount.Text = $"Toplam dosya: {lstFiles.Items.Count}";
+            => lblCount.Text = $"Total files: {lstFiles.Items.Count}";
 
         private void SaveCombined()
         {
             if (_files.Count == 0)
             {
-                MessageBox.Show(this, "Birleştirilecek dosya yok.", "Uyarı",
+                MessageBox.Show(this, "No files to merge.", "Warning",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             var prefix = txtPrefix.Text?.Trim();
             if (string.IsNullOrWhiteSpace(prefix))
             {
-                MessageBox.Show(this, "Lütfen dosya adı için bir ön ek girin.", "Uyarı",
+                MessageBox.Show(this, "Please enter a file name prefix.", "Warning",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtPrefix.Focus();
                 return;
@@ -428,8 +428,8 @@ namespace MergeFilesWinForms
             var fileName = $"{prefix}{DateTime.Now.ToString("yyMMddhhmm")}";
             using var sfd = new SaveFileDialog
             {
-                Title = "Birleştirilmiş dosyayı kaydet",
-                Filter = "Metin Dosyası|*.txt|Tümü|*.*",
+                Title = "Save merged file",
+                Filter = "Text File|*.txt|All Files|*.*",
                 FileName = fileName,
                 OverwritePrompt = true
             };
@@ -455,7 +455,7 @@ namespace MergeFilesWinForms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, $"Kaydetme hatası: {ex.Message}", "Hata",
+                MessageBox.Show(this, $"Save error: {ex.Message}", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -490,7 +490,7 @@ namespace MergeFilesWinForms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, $"Dosya açılamadı: {ex.Message}", "Hata",
+                MessageBox.Show(this, $"Could not open file: {ex.Message}", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
