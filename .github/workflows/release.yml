@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     tags:
-      - 'v*'  # v1.0.0, v2.0.0 gibi tag'lerde tetiklenir
+      - 'v*'
 
 jobs:
   build:
@@ -25,25 +25,19 @@ jobs:
 
       - name: Get version from tag
         id: version
-        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $env:GITHUB_OUTPUT
+        shell: bash
+        run: |
+          TAG=${GITHUB_REF#refs/tags/v}
+          echo "VERSION=$TAG" >> $GITHUB_OUTPUT
+          echo "Extracted version: $TAG"
 
       - name: Publish WPF
         run: |
-          dotnet publish MergeFilesWPF/MergeFilesWPF.csproj `
-            -c Release -r win-x64 --self-contained `
-            -p:PublishSingleFile=true `
-            -p:IncludeNativeLibrariesForSelfExtract=true `
-            -p:Version=${{ steps.version.outputs.VERSION }} `
-            -o ./publish/wpf
+          dotnet publish MergeFilesWPF/MergeFilesWPF.csproj -c Release -r win-x64 --self-contained -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o ./publish/wpf
 
       - name: Publish WinForms
         run: |
-          dotnet publish MergeFilesWinForms/MergeFilesWinForms.csproj `
-            -c Release -r win-x64 --self-contained `
-            -p:PublishSingleFile=true `
-            -p:IncludeNativeLibrariesForSelfExtract=true `
-            -p:Version=${{ steps.version.outputs.VERSION }} `
-            -o ./publish/winforms
+          dotnet publish MergeFilesWinForms/MergeFilesWinForms.csproj -c Release -r win-x64 --self-contained -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o ./publish/winforms
 
       - name: Create ZIP packages
         run: |
