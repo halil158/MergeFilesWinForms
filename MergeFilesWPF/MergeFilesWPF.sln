@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.1.11312.151 d18.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MergeFilesWPF", "MergeFilesWPF.csproj", "{5C3C0F27-37C1-1C10-7512-9BA6B00245C6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5C3C0F27-37C1-1C10-7512-9BA6B00245C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C3C0F27-37C1-1C10-7512-9BA6B00245C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C3C0F27-37C1-1C10-7512-9BA6B00245C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C3C0F27-37C1-1C10-7512-9BA6B00245C6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {21287F84-C63A-4DAD-A7CE-3C637B31CF83}
+	EndGlobalSection
+EndGlobal

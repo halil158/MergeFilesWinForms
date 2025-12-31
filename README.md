@@ -1,57 +1,92 @@
-MergeFilesWinForms
+# MergeFiles
 
-MergeFilesWinForms is a simple but useful Windows Forms application that allows you to merge multiple files or entire folders into a single text file.
-It’s especially handy for developers who want to collect project files in one place, share code snippets, or prepare data for AI tools.
+MergeFiles is a Windows application that allows you to merge multiple files or entire folders into a single text file. It's especially handy for developers who want to collect project files in one place, share code snippets, or prepare data for AI tools.
 
-🚀 Features
+## Versions
 
-Drag & Drop support: Drop files or folders directly into the window.
+| Version | Framework | Description |
+|---------|-----------|-------------|
+| **MergeFilesWPF** | .NET 10.0 (LTS) | Modern dark theme UI with animations |
+| **MergeFilesWinForms** | .NET 9.0 | Classic Windows Forms UI |
 
-Add folder with subfolders: Automatically includes all files in a directory tree.
+## Features
 
-File extension filter (AllowList): Control which file types are included via allow.txt.
+- **Drag & Drop support**: Drop files or folders directly into the window
+- **Add folder with subfolders**: Automatically includes all files in a directory tree
+- **File extension filter (allow.txt)**: Control which file types are included
+- **Ignore list (ignore.txt)**: Exclude unwanted folders (e.g., `bin`, `obj`, `build`, `node_modules`)
+- **Include override (include.txt)**: Force include specific files from ignored folders
+- **Easy management**: Remove selected items, clear the entire list, and see the total file count
+- **File merging**: Combines the contents of all selected files into a single output file
+- **Encoding detection**: Supports UTF-8, UTF-16, UTF-32 with BOM detection
+- **Quick access**: Opens the merged file's folder automatically after saving
+- **Configurable**: Directly open and edit config files from the UI
 
-Ignore list: Exclude unwanted folders (e.g., bin, obj, wwwroot/vendor) using ignore.txt.
+## Configuration Files
 
-Easy management: Remove selected items, clear the entire list, and see the total file count.
+### allow.txt
+Controls which file extensions are included:
+```
+.c
+.cpp
+.h
+.cs
+.js
+.ts
+.json
+.xml
+.yaml
+```
 
-File merging: Combines the contents of all selected files into a single MergedFiles.txt.
+### ignore.txt
+Folders/paths to exclude:
+```
+bin
+obj
+node_modules
+build
+.vs
+```
 
-Encoding detection: Supports UTF-8, UTF-16, UTF-32 with BOM detection.
+### include.txt
+Override ignore rules for specific files (relative paths):
+```
+# Include specific files from ignored folders
+build/zephyr/zephyr.dts
+build/zephyr/zephyr.map
+```
 
-Quick access: Opens the merged file’s folder automatically after saving.
+## Use Cases
 
-Configurable: Directly open and edit allow.txt and ignore.txt from the UI.
+- Collect code or config files into one sharable text file
+- Prepare project files for AI tools (e.g., ChatGPT, Claude, Copilot)
+- Merge logs, configs, and scripts into a single file
+- Create project snapshots for code review
 
-📂 Use Cases
+## Screenshots
 
-Collect code or config files into one sharable text file.
+### WPF Version (Dark Theme)
+Modern UI with dark theme, hover effects, and drag & drop animations.
 
-Prepare project files for AI tools (e.g., ChatGPT, Copilot).
+### WinForms Version
+Classic Windows Forms interface.
 
-Merge logs, configs, and scripts into a single file.
+## Build
 
-🖼️ Screenshot
+### Requirements
+- Visual Studio 2022 or later
+- .NET 10.0 SDK (for WPF version)
+- .NET 9.0 SDK (for WinForms version)
 
-<img width="986" height="643" alt="image" src="https://github.com/user-attachments/assets/f1bdd8e7-5f2b-4de3-951e-020e5da2898b" />
+### Build Commands
+```bash
+# WPF Version
+dotnet build MergeFilesWPF/MergeFilesWPF.csproj
 
+# WinForms Version
+dotnet build MergeFilesWinForms/MergeFilesWinForms.csproj
+```
 
-⚙️ How to Use
-
-Launch the app.
-
-Drag & drop files or folders into the window.
-
-Edit allow.txt / ignore.txt if needed.
-
-Click Merge → MergedFiles.txt is ready 🎉
-
-🔧 Build
-
-Visual Studio 2022 (or compatible)
-
-.NET Framework 4.8 / .NET 6+ (any WinForms-supported runtime)
-
-📜 License
+## License
 
 Released under the MIT License – free for personal and commercial use.
