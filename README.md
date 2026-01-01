@@ -2,6 +2,8 @@
 
 [![Website](https://img.shields.io/badge/Website-mergefiles.yigisoft.com-blue)](https://mergefiles.yigisoft.com/)
 
+**Quick Links:** [Website / Live Demo](https://mergefiles.yigisoft.com/) · [Download (Latest Release)](https://github.com/halil158/MergeFiles/releases/latest) · [Source Code](https://github.com/halil158/MergeFiles)
+
 MergeFiles is a Windows application that allows you to merge multiple files or entire folders into a single text file. It's especially handy for developers who want to collect project files in one place, share code snippets, or prepare data for AI tools.
 
 ## Versions
@@ -24,6 +26,15 @@ MergeFiles is a Windows application that allows you to merge multiple files or e
 - **Encoding detection**: Supports UTF-8, UTF-16, UTF-32 with BOM detection
 - **Quick access**: Opens the merged file's folder automatically after saving
 - **Configurable**: Directly open and edit config files from the UI
+
+## Quick Start (Windows)
+
+1. Download the latest release from [GitHub Releases](https://github.com/halil158/MergeFiles/releases/latest) or [Website](https://mergefiles.yigisoft.com/)
+2. Extract the ZIP file to any folder
+3. Run `MergeFilesWPF.exe` (modern UI) or `MergeFilesWinForms.exe` (classic UI)
+4. Drag & drop files/folders or use "Add Folder" button
+5. Click "Merge" to combine files into a single text file
+6. (Optional) Edit config files via the UI: `allow.txt`, `ignore.txt`, `include.txt`
 
 ## Configuration Files
 
@@ -91,11 +102,11 @@ Files included:
 
 ### WPF Version (Dark Theme)
 Modern UI with dark theme, hover effects, and drag & drop animations.
-![WPF Version](screenshots/MergeFilesWPF.png)
+![MergeFiles WPF Dark Theme - Modern UI with animations](screenshots/MergeFilesWPF.png)
 
 ### WinForms Version
 Classic Windows Forms interface.
-![WinForms Version](screenshots/MergeFilesWinForms.png)
+![MergeFiles WinForms - Classic Windows Forms UI](screenshots/MergeFilesWinForms.png)
 
 ## Build
 
@@ -112,6 +123,10 @@ dotnet build MergeFilesWPF/MergeFilesWPF.csproj
 # WinForms Version
 dotnet build MergeFilesWinForms/MergeFilesWinForms.csproj
 ```
+
+## Topics
+
+`wpf` `winforms` `dotnet` `desktop-app` `file-merge` `developer-tools` `ai-tools`
 
 ## License
 
